@@ -85,13 +85,13 @@
 <meta name="keywords" content="Hexo,Node.js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Hexo搭建Github Pages博客">
-<meta property="og:url" content="http://yoursite.com/2018/05/01/Pages博客/index.html">
+<meta property="og:url" content="http://yoursite.com/post/39813.html">
 <meta property="og:site_name" content="Styx">
 <meta property="og:description" content="初次接触Hexo有很多东西还在探索中，由于好奇心驱使想要为自己搭建一个Hexo博客并托管在github pages上。在自己折腾一下午终于搞定了，所以决定把这一过程记录下来，姑且算是一次笔记吧！ 写在前面本机环境: OS: Windows 7 Git: 2.16.2.windows.1 Node: v8.11.1  需要使用npm安装的命令，可以使用cnpm代替，有助提升速度和成功率。12# 设置">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://raw.githubusercontent.com/Styx11/Markdown-Photos/master/2018-05-01_192530.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Styx11/Markdown-Photos/master/2018-05-01_22360.png">
-<meta property="og:updated_time" content="2018-05-06T09:44:04.475Z">
+<meta property="og:updated_time" content="2018-05-07T14:18:30.517Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Hexo搭建Github Pages博客">
 <meta name="twitter:description" content="初次接触Hexo有很多东西还在探索中，由于好奇心驱使想要为自己搭建一个Hexo博客并托管在github pages上。在自己折腾一下午终于搞定了，所以决定把这一过程记录下来，姑且算是一次笔记吧！ 写在前面本机环境: OS: Windows 7 Git: 2.16.2.windows.1 Node: v8.11.1  需要使用npm安装的命令，可以使用cnpm代替，有助提升速度和成功率。12# 设置">
@@ -125,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/01/Pages博客/"/>
+  <link rel="canonical" href="http://yoursite.com/post/39813.html"/>
 
 
 
@@ -248,7 +248,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/01/Pages博客/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/post/39813.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Styx">
@@ -293,8 +293,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2018-05-06T17:44:04+08:00">
-                2018-05-06
+              <time title="Post modified" itemprop="dateModified" datetime="2018-05-07T22:18:30+08:00">
+                2018-05-07
               </time>
             
           </span>
@@ -325,6 +325,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/post/39813.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/post/39813.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -350,7 +360,7 @@
 
       
         <p>初次接触<a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>有很多东西还在探索中，由于好奇心驱使想要为自己搭建一个Hexo博客并托管在github pages上。在自己折腾一下午终于搞定了，所以决定把这一过程记录下来，姑且算是一次笔记吧！</p>
-<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><h4 id="本机环境"><a href="#本机环境" class="headerlink" title="本机环境:"></a>本机环境:</h4><ul>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><h3 id="本机环境"><a href="#本机环境" class="headerlink" title="本机环境:"></a>本机环境:</h3><ul>
 <li>OS: Windows 7</li>
 <li>Git: 2.16.2.windows.1</li>
 <li>Node: v8.11.1</li>
@@ -369,13 +379,13 @@
 <p>仓库创建成功后，github会给你该仓库的https和ssh地址，复制它们备用。</p>
 <p><img src="https://raw.githubusercontent.com/Styx11/Markdown-Photos/master/2018-05-01_22360.png" alt=""></p>
 <h2 id="克隆Git仓库到本地"><a href="#克隆Git仓库到本地" class="headerlink" title="克隆Git仓库到本地"></a>克隆Git仓库到本地</h2><p>在配置完用户信息的前提下，利用Git bash在你站点根目录下执行:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 这个https是你新建仓库时给你的</span><br><span class="line">$ git clone &lt;your-github-repo-https-address&gt;</span><br></pre></td></tr></table></figure></p>
-<h2 id="部署到Git-Pages"><a href="#部署到Git-Pages" class="headerlink" title="部署到Git Pages"></a>部署到Git Pages</h2><h4 id="在Hexo中配置项目部署信息"><a href="#在Hexo中配置项目部署信息" class="headerlink" title="在Hexo中配置项目部署信息"></a>在Hexo中配置项目部署信息</h4><p>Hexo提供了快速方便的一键部署功能，我们只需要一条命令就能将网站部署到服务器上。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></p>
+<h2 id="部署到Git-Pages"><a href="#部署到Git-Pages" class="headerlink" title="部署到Git Pages"></a>部署到Git Pages</h2><h3 id="在Hexo中配置项目部署信息"><a href="#在Hexo中配置项目部署信息" class="headerlink" title="在Hexo中配置项目部署信息"></a>在Hexo中配置项目部署信息</h3><p>Hexo提供了快速方便的一键部署功能，我们只需要一条命令就能将网站部署到服务器上。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></p>
 <p>第一次执行部署我们还需要安装<a href="https://github.com/hexojs/hexo-deployer-git" target="_blank" rel="noopener">hexo-deploy-git</a>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
 <p>之后我们需要修改你博客目录下的<code>_config.yml</code>文件。在deploy部分填写配置信息，<code>repository</code>设置为复制好的ssh地址。</p>
 <blockquote>
-<p>deploy:<br>    <font color="#dd1144" \="">  type: git</font><br>    <font color="#dd1144" \="">  repository: <your-github-repo-ssh-address></your-github-repo-ssh-address></font><br>    <font color="#dd1144" \="">  branch:　master</font></p>
+<p>deploy:<br>    <font color="#dd1144" \="">  type: git</font><br>    <font color="#dd1144" \="">  repository: your-github-repo-ssh-address</font><br>    <font color="#dd1144" \="">  branch:　master</font></p>
 </blockquote>
-<h4 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h4><p>因为此时我们的原生项目中已有一篇默认博客<code>Hello World</code>，所以我们可以马上尝试部署到github pages。</p>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>因为此时我们的原生项目中已有一篇默认博客<code>Hello World</code>，所以我们可以马上尝试部署到github pages。</p>
 <p>删除<code>database</code>和<code>public</code>文件夹<br>（第一次生成网页可以跳过这一步，日后在本地写文章的时候，可能会有更改md文件名等操作，清空这两个地方可以在<code>generate</code>的时候生成一份最新的项目结构）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br></pre></td></tr></table></figure></p>
 <p>生成部署所需文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></p>
 <p>写post时执行以下命令可以实时监视文件变动。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate --watch</span><br></pre></td></tr></table></figure></p>
@@ -414,7 +424,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/29/hello-world/" rel="next" title="Hello World">
+              <a href="/post/16107.html" rel="next" title="Hello World">
                 <i class="fa fa-chevron-left"></i> Hello World
               </a>
             
@@ -424,7 +434,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/06/post/" rel="prev" title="配置NexT主题及各插件安装">
+              <a href="/post/41492.html" rel="prev" title="配置NexT主题及各插件安装">
                 配置NexT主题及各插件安装 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -456,8 +466,16 @@
           
 
   
+    <div class="comments" id="comments">
+      
+        <div onclick="showGitment()" id="gitment-display-button">Show comments from Gitment</div>
+        <div id="gitment-container" style="display:none"></div>
+      
+    </div>
 
+  
 
+  
 
         </div>
         
@@ -569,7 +587,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#本机环境"><span class="nav-number">1.0.1.</span> <span class="nav-text">本机环境:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Node-js及Git"><span class="nav-number">2.</span> <span class="nav-text">安装Node.js及Git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Hexo、新建站点"><span class="nav-number">3.</span> <span class="nav-text">安装Hexo、新建站点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建Git仓库"><span class="nav-number">4.</span> <span class="nav-text">创建Git仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#克隆Git仓库到本地"><span class="nav-number">5.</span> <span class="nav-text">克隆Git仓库到本地</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署到Git-Pages"><span class="nav-number">6.</span> <span class="nav-text">部署到Git Pages</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在Hexo中配置项目部署信息"><span class="nav-number">6.0.1.</span> <span class="nav-text">在Hexo中配置项目部署信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#部署"><span class="nav-number">6.0.2.</span> <span class="nav-text">部署</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本机环境"><span class="nav-number">1.1.</span> <span class="nav-text">本机环境:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Node-js及Git"><span class="nav-number">2.</span> <span class="nav-text">安装Node.js及Git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Hexo、新建站点"><span class="nav-number">3.</span> <span class="nav-text">安装Hexo、新建站点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建Git仓库"><span class="nav-number">4.</span> <span class="nav-text">创建Git仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#克隆Git仓库到本地"><span class="nav-number">5.</span> <span class="nav-text">克隆Git仓库到本地</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署到Git-Pages"><span class="nav-number">6.</span> <span class="nav-text">部署到Git Pages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在Hexo中配置项目部署信息"><span class="nav-number">6.1.</span> <span class="nav-text">在Hexo中配置项目部署信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署"><span class="nav-number">6.2.</span> <span class="nav-text">部署</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -746,6 +764,47 @@
 
 
 
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'styx11',
+            repo: 'https://github.com/Styx11/Gitment_Comment.git',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '01762078d4ec4eaff209cd19d8607353d44429b6',
+            
+                client_id: 'a367520f1ed2fd565714'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      function showGitment(){
+        document.getElementById("gitment-display-button").style.display = "none";
+        document.getElementById("gitment-container").style.display = "block";
+        renderGitment();
+      }
+      
+      </script>
+    
 
 
 

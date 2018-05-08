@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[配置NexT主题及各插件安装]]></title>
+    <url>%2Fpost%2F41492.html</url>
+    <content type="text"><![CDATA[在捣鼓了几天原生Hexo博客后，我突然觉得虽然它的默认主题也挺好看的，但是无法满足我内心对装逼的追求。所以我在试图寻找一个简洁强大的主题，来好好装饰博客一番————NexT完美满足了我的需求。 什么是NexTNext是一款基于Hexo的拓展主题，由iissnan开发。得益于Hexo的扩展机制，NexT集成了众多优秀易用的第三方插件让开发者根据自己的需要进行配置，加上超高的的颜值也使得NexT在Github上获得了大量stars。本文根据官方文档整理，记录了自己搭建过程和常用配置，如需完整说明，请参考Next官方文档. 安装在配置了所有必要环境下，NexT的安装就变得格外容易。在终端窗口下，定位到 Hexo 站点目录下。使用 Git checkout 代码：12$ cd &lt;your-hexo-site&gt;$ git clone https://github.com/iissnan/hexo-theme-next themes/next 与所有 Hexo 主题启用的模式一样。 当 克隆/下载 完成后，打开站点配置文件_config.yml， 找到 theme 字段，并将其值更改为 next。 theme: next 到此，NexT 主题安装完成。下一步我们将验证主题是否正确启用。在切换主题之后、验证之前， 我们最好使用 hexo clean 来清除 Hexo 的缓存。 现在，我们就可以在本地验证主题是否安装成功。12# 访问localhost$ hexo server 当你看到站点的外观与下图所示类似时即说明你已成功安装 NexT 主题。这是 NexT 默认的 Scheme —— Muse 个性配置因为大部分的用户设置在搭建Hexo时已经完成，所以这里只简单介绍一些用户配置 添加「标签」页面新建「标签」页面，并在菜单中显示「标签」链接。「标签」页面将展示站点的所有标签，若你的所有文章都未包含标签，此页面将是空的。在根目录下执行:1$ hexo new page tags 确认站点配置文件里有tag_dir: tags确认主题配置文件里有tags: /tags编辑站点的source/tags/index.md，添加 title: tags date: 2015-10-20 06:49:50 type: “tags”comments: false 在菜单中添加链接。编辑主题配置文件config.yml ， 添加 tags 到 menu 中，如下: menu: home: / archives: /archives tags: /tags 其他更多主题的个性配置可参考: hexo的next主题个性化配置教程hexo静态博客修改侧边栏NexT主题配置 By the way, 对于NexT目前最新的版本 v6.0.x ，要设置语言为中文需要设置站点配置为 language: zh-CN 而不是 zn-Hans。 插件安装RSS首先进入本地hexo目录，打开git bash。输入以下命令1npm install hexo-generator-feed 然后在本地根目录下的_config.yml文件中，添加以下配置 # Extensions## Plugins: http://hexo.io/plugins/#RSS订阅plugin: - hexo-generator-feed#Feed Atomfeed: type: atom path: atom.xml limit: 20 最后在主题目录下的_config.yml目录下，添加如下配置: rss: \atom.xml Gitment本博客评论系统已迁移至 Gitment。虽然 Gitment 只能使用 GitHub 账号进行评论，但考虑到博客受众，这是可以接受的。 Gitment 是 Shiquan Sun 实现的一款基于 GitHub Issues 的评论系统。支持在前端直接引入，不需要任何后端代码。可以在页面进行登录、查看、评论、点赞等操作，同时有完整的 Markdown / GFM 和代码高亮支持。尤为适合各种基于 GitHub Pages 的静态博客或项目页面。 在NexT较新版本 v5.0.x 及以上已经集成了Gitment插件，所以我们只需要修改主题配置文件即可 gitment: enable: true mint: true count: true lazy: true cleanly: false language: en github_user: Your Github Username github_repo: The name of the repo you use to store Gitment comments client_id: yourid client_secret: yoursecret 至于类似注册OAuth Application的一些细节可参考: hexo next主题集成gitment评论系统使用 GitHub Issues 搭建评论系统作者issueGitment评论功能接入踩坑教程 Local Search添加百度/谷歌/本地 自定义站点内容搜索 安装 hexo-generator-searchdb，在站点的根目录下执行以下命令：1$ npm install hexo-generator-searchdb --save 编辑 站点配置文件，新增以下内容到任意位置： search: path: search.xml field: post format: html limit: 10000 编辑 主题配置文件，启用本地搜索功能： #Local searchlocal_search: enable: true 插件的安装持续更新中…]]></content>
+      <categories>
+        <category>原创</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用Hexo搭建Github Pages博客]]></title>
+    <url>%2Fpost%2F39813.html</url>
+    <content type="text"><![CDATA[初次接触Hexo有很多东西还在探索中，由于好奇心驱使想要为自己搭建一个Hexo博客并托管在github pages上。在自己折腾一下午终于搞定了，所以决定把这一过程记录下来，姑且算是一次笔记吧！ 写在前面本机环境: OS: Windows 7 Git: 2.16.2.windows.1 Node: v8.11.1 需要使用npm安装的命令，可以使用cnpm代替，有助提升速度和成功率。12# 设置 npm 为国内镜像提升安装速度$ npm config set registry https://registry.taobao.org/ cnpmjs = 淘宝NPM镜像。有英文版说明 和 中文版说明。 安装Node.js及Git 具体方法参考Node.js和Git官方文档 关于SSH key的生成和配置，github有详细的帮助文档可以参考。 安装Hexo、新建站点在确认Node及Git的安装、配置完毕后，只需要使用 npm 即可完成 Hexo 的安装。12# 安装 Hexo$ npm install -g hexo-cli 安装 Hexo 完毕后，执行以下命令，Hexo会在指定文件中新建所需文件。1234# &lt;folder&gt;是指定路径$ hexo init &lt;folder&gt;$ cd &lt;folder&gt;$ npm install 关于 Hexo 的更多相关操作参考中文文档。 创建Git仓库在你的github中创建一个repository，并将其命名为username.github.io（ username是你的github用户名） 假设github用户名为john，那你的仓库就必须是john.github.io。如果你创建一个叫做jason.github.io的仓库，最后deploy完以后打开页面是会报错的。 （图中标红报错是因为仓库已经创建） 仓库创建成功后，github会给你该仓库的https和ssh地址，复制它们备用。 克隆Git仓库到本地在配置完用户信息的前提下，利用Git bash在你站点根目录下执行:12# 这个https是你新建仓库时给你的$ git clone &lt;your-github-repo-https-address&gt; 部署到Git Pages在Hexo中配置项目部署信息Hexo提供了快速方便的一键部署功能，我们只需要一条命令就能将网站部署到服务器上。1$ hexo deploy 第一次执行部署我们还需要安装hexo-deploy-git。1$ npm install hexo-deployer-git --save 之后我们需要修改你博客目录下的_config.yml文件。在deploy部分填写配置信息，repository设置为复制好的ssh地址。 deploy: type: git repository: your-github-repo-ssh-address branch: master 部署因为此时我们的原生项目中已有一篇默认博客Hello World，所以我们可以马上尝试部署到github pages。 删除database和public文件夹（第一次生成网页可以跳过这一步，日后在本地写文章的时候，可能会有更改md文件名等操作，清空这两个地方可以在generate的时候生成一份最新的项目结构）1$ hexo clean 生成部署所需文件1$ hexo generate 写post时执行以下命令可以实时监视文件变动。1$ hexo generate --watch 完成后即可进行部署。1$ hexo deploy 部署成功后，打开https://your-github-username.github.io，就能看见默认博客。 至此，hexo的博客生成和部署已经全部成功。]]></content>
+      <categories>
+        <category>原创</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Node.js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2Fpost%2F16107.html</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+</search>

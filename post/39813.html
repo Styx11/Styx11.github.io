@@ -2,15 +2,21 @@
 
 
 
+
+
+
   
 
 
-<html class="theme-next muse use-motion" lang="">
+<html class="theme-next muse use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
 <meta name="theme-color" content="#222">
+
+
+
 
 
 
@@ -38,10 +44,6 @@
 
 
 
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
 
 
 
@@ -50,52 +52,25 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Hexo,Node.js," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Styx" type="application/atom+xml" />
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#222">
 
 
 
 
 
 
-<meta name="description" content="初次接触Hexo有很多东西还在探索中，由于好奇心驱使想要为自己搭建一个Hexo博客并托管在github pages上。在自己折腾一下午终于搞定了，所以决定把这一过程记录下来，姑且算是一次笔记吧！ 写在前面本机环境: OS: Windows 7 Git: 2.16.2.windows.1 Node: v8.11.1  需要使用npm安装的命令，可以使用cnpm代替，有助提升速度和成功率。12# 设置">
-<meta name="keywords" content="Hexo,Node.js">
-<meta property="og:type" content="article">
-<meta property="og:title" content="使用Hexo搭建Github Pages博客">
-<meta property="og:url" content="http://yoursite.com/post/39813.html">
-<meta property="og:site_name" content="Styx">
-<meta property="og:description" content="初次接触Hexo有很多东西还在探索中，由于好奇心驱使想要为自己搭建一个Hexo博客并托管在github pages上。在自己折腾一下午终于搞定了，所以决定把这一过程记录下来，姑且算是一次笔记吧！ 写在前面本机环境: OS: Windows 7 Git: 2.16.2.windows.1 Node: v8.11.1  需要使用npm安装的命令，可以使用cnpm代替，有助提升速度和成功率。12# 设置">
-<meta property="og:locale" content="default">
-<meta property="og:image" content="https://raw.githubusercontent.com/Styx11/Markdown-Photos/master/2018-05-01_192530.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Styx11/Markdown-Photos/master/2018-05-01_22360.png">
-<meta property="og:updated_time" content="2018-05-07T14:18:30.517Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用Hexo搭建Github Pages博客">
-<meta name="twitter:description" content="初次接触Hexo有很多东西还在探索中，由于好奇心驱使想要为自己搭建一个Hexo博客并托管在github pages上。在自己折腾一下午终于搞定了，所以决定把这一过程记录下来，姑且算是一次笔记吧！ 写在前面本机环境: OS: Windows 7 Git: 2.16.2.windows.1 Node: v8.11.1  需要使用npm安装的命令，可以使用cnpm代替，有助提升速度和成功率。12# 设置">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/Styx11/Markdown-Photos/master/2018-05-01_192530.png">
 
 
 
@@ -104,15 +79,13 @@
   var CONFIG = {
     root: '/',
     scheme: 'Muse',
-    version: '5.1.4',
+    version: '6.2.0',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
     algolia: {
       applicationID: '',
       apiKey: '',
@@ -124,12 +97,43 @@
 </script>
 
 
+  
+
+
+
+
+  <meta name="description" content="初次接触Hexo有很多东西还在探索中，由于好奇心驱使想要为自己搭建一个Hexo博客并托管在github pages上。在自己折腾一下午终于搞定了，所以决定把这一过程记录下来，姑且算是一次笔记吧！ 写在前面本机环境: OS: Windows 7 Git: 2.16.2.windows.1 Node: v8.11.1  需要使用npm安装的命令，可以使用cnpm代替，有助提升速度和成功率。12# 设置">
+<meta name="keywords" content="Hexo,Node.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Hexo搭建Github Pages博客">
+<meta property="og:url" content="http://yoursite.com/post/39813.html">
+<meta property="og:site_name" content="Styx">
+<meta property="og:description" content="初次接触Hexo有很多东西还在探索中，由于好奇心驱使想要为自己搭建一个Hexo博客并托管在github pages上。在自己折腾一下午终于搞定了，所以决定把这一过程记录下来，姑且算是一次笔记吧！ 写在前面本机环境: OS: Windows 7 Git: 2.16.2.windows.1 Node: v8.11.1  需要使用npm安装的命令，可以使用cnpm代替，有助提升速度和成功率。12# 设置">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Styx11/Markdown-Photos/master/2018-05-01_192530.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Styx11/Markdown-Photos/master/2018-05-01_22360.png">
+<meta property="og:updated_time" content="2018-05-07T14:18:30.517Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Hexo搭建Github Pages博客">
+<meta name="twitter:description" content="初次接触Hexo有很多东西还在探索中，由于好奇心驱使想要为自己搭建一个Hexo博客并托管在github pages上。在自己折腾一下午终于搞定了，所以决定把这一过程记录下来，姑且算是一次笔记吧！ 写在前面本机环境: OS: Windows 7 Git: 2.16.2.windows.1 Node: v8.11.1  需要使用npm安装的命令，可以使用cnpm代替，有助提升速度和成功率。12# 设置">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Styx11/Markdown-Photos/master/2018-05-01_192530.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Styx" type="application/atom+xml" />
+
+
+
 
   <link rel="canonical" href="http://yoursite.com/post/39813.html"/>
 
 
 
-
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
 
   <title>使用Hexo搭建Github Pages博客 | Styx</title>
   
@@ -141,9 +145,37 @@
 
 
 
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -159,7 +191,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Styx</span>
         <span class="logo-line-after"><i></i></span>
@@ -171,7 +203,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button>
+    <button aria-label="切换导航栏">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -179,45 +211,54 @@
   </div>
 </div>
 
-<nav class="site-nav">
-  
 
+
+
+<nav class="site-nav">
   
     <ul id="menu" class="menu">
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Home
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            Categories
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archives
-          </a>
-        </li>
-      
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
 
       
+      
     </ul>
+  
+
+  
+    
+
   
 
   
@@ -225,12 +266,20 @@
 
 
 
- </div>
+  
+
+
+
+</div>
     </header>
+
+    
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
           <div id="content" class="content">
             
 
@@ -241,6 +290,8 @@
 
   
   
+  
+
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -265,37 +316,50 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">使用Hexo搭建Github Pages博客</h1>
+          <h1 class="post-title" itemprop="name headline">使用Hexo搭建Github Pages博客
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-01T17:59:47+08:00">
-                2018-05-01
-              </time>
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-01 17:59:47" itemprop="dateCreated datePublished" datetime="2018-05-01T17:59:47+08:00">2018-05-01</time>
             
 
             
-              <span class="post-meta-divider">|</span>
-            
+              
 
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
               
-                <span class="post-meta-item-text">Post modified&#58;</span>
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-05-07 22:18:30" itemprop="dateModified" datetime="2018-05-07T22:18:30+08:00">2018-05-07</time>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2018-05-07T22:18:30+08:00">
-                2018-05-07
-              </time>
             
           </span>
 
@@ -308,14 +372,10 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/原创/" itemprop="url" rel="index">
-                    <span itemprop="name">原创</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/原创/" itemprop="url" rel="index"><span itemprop="name">原创</span></a></span>
 
                 
                 
@@ -331,7 +391,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/post/39813.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/post/39813.html" itemprop="commentsCount"></span>
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count gitment-comments-count" data-xid="/post/39813.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -395,6 +455,9 @@
 
       
     </div>
+
+    
+
     
     
     
@@ -462,20 +525,17 @@
           </div>
           
 
-
-          
-
   
     <div class="comments" id="comments">
       
-        <div onclick="showGitment()" id="gitment-display-button">Show comments from Gitment</div>
+        <div onclick="showGitment()" id="gitment-display-button">显示 Gitment 评论</div>
         <div id="gitment-container" style="display:none"></div>
       
     </div>
 
   
 
-  
+
 
         </div>
         
@@ -498,10 +558,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            站点概览
           </li>
         </ul>
       
@@ -518,42 +578,54 @@
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
-          <nav class="site-state motion-element">
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
 
-            
-              <div class="site-state-item site-state-posts">
               
-                <a href="/archives/">
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
               
-                  <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">posts</span>
-                </a>
-              </div>
-            
 
-            
               
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
               
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
-                  <span class="site-state-item-name">categories</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">tags</span>
-                </a>
-              </div>
-            
-
-          </nav>
+            </nav>
+          
 
           
             <div class="feed-link motion-element">
@@ -572,6 +644,9 @@
           
           
 
+          
+            
+          
           
 
         </div>
@@ -608,16 +683,20 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
+  <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Styx</span>
 
   
+
+  
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
 
 
 
@@ -625,12 +704,13 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Muse</a> v6.2.0</div>
 
 
 
 
         
+
 
 
 
@@ -669,7 +749,11 @@
 
 
 
-  
+
+
+
+
+
 
 
 
@@ -689,16 +773,6 @@
 
   
   
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
     <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
@@ -707,18 +781,13 @@
     <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
 
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
 
 
 
@@ -726,23 +795,19 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
 
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
 
 
 
   
-
-
-  
-
 
 
 
@@ -765,7 +830,6 @@
 
 
 
-
 <!-- LOCAL: You can save these files to your site and update links -->
     
         
@@ -780,7 +844,7 @@
       <script type="text/javascript">
       function renderGitment(){
         var gitment = new Gitmint({
-            id: window.location.pathname, 
+            id: window.location.pathname,
             owner: 'styx11',
             repo: 'Styx11.github.io',
             
@@ -811,7 +875,6 @@
 
 
 
-
   
 
 
@@ -825,6 +888,12 @@
   
 
   
+
+  
+  
+
+  
+
   
 
   

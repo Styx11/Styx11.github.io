@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Babel 转码器的使用 | Styx</title>
+    <meta name="description" content="Just playing around">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.6ba01dbc.css" as="style"><link rel="preload" href="/assets/js/app.f33563e9.js" as="script"><link rel="preload" href="/assets/js/14.bad14721.js" as="script"><link rel="prefetch" href="/assets/js/10.5f4973d1.js"><link rel="prefetch" href="/assets/js/11.8991f8db.js"><link rel="prefetch" href="/assets/js/12.ed7c6524.js"><link rel="prefetch" href="/assets/js/13.eded3c68.js"><link rel="prefetch" href="/assets/js/15.42e2c38e.js"><link rel="prefetch" href="/assets/js/16.9b6de277.js"><link rel="prefetch" href="/assets/js/17.b78c46c5.js"><link rel="prefetch" href="/assets/js/18.a248f5bc.js"><link rel="prefetch" href="/assets/js/2.54a6f322.js"><link rel="prefetch" href="/assets/js/3.170eca16.js"><link rel="prefetch" href="/assets/js/4.558ff898.js"><link rel="prefetch" href="/assets/js/5.57410d08.js"><link rel="prefetch" href="/assets/js/6.a81ef740.js"><link rel="prefetch" href="/assets/js/7.3540a84b.js"><link rel="prefetch" href="/assets/js/8.ce0a4fd9.js"><link rel="prefetch" href="/assets/js/9.64678869.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.6ba01dbc.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Styx</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">Home</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">Blog</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/JavaScript/" class="nav-link router-link-active">JavaScipt</a></li><li class="dropdown-item"><!----> <a href="/blog/Node/" class="nav-link">Node</a></li></ul></div></div><div class="nav-item"><a href="/blog/Projects/" class="nav-link">Projects</a></div><div class="nav-item"><a href="https://github.com/Styx11" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">Home</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">Blog</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/JavaScript/" class="nav-link router-link-active">JavaScipt</a></li><li class="dropdown-item"><!----> <a href="/blog/Node/" class="nav-link">Node</a></li></ul></div></div><div class="nav-item"><a href="/blog/Projects/" class="nav-link">Projects</a></div><div class="nav-item"><a href="https://github.com/Styx11" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/blog/JavaScript/" class="sidebar-link">Fisher-Yates洗牌算法</a></li><li><a href="/blog/JavaScript/use_babel.html" class="active sidebar-link">Babel 转码器的使用</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/JavaScript/use_babel.html#配置文件-babelrc" class="sidebar-link">配置文件.babelrc</a></li><li class="sidebar-sub-header"><a href="/blog/JavaScript/use_babel.html#命令行转码" class="sidebar-link">命令行转码</a></li><li class="sidebar-sub-header"><a href="/blog/JavaScript/use_babel.html#babel-register-模块" class="sidebar-link">@babel/register 模块</a></li><li class="sidebar-sub-header"><a href="/blog/JavaScript/use_babel.html#babel-polyfill-模块" class="sidebar-link">@babel/polyfill 模块</a></li><li class="sidebar-sub-header"><a href="/blog/JavaScript/use_babel.html#babel-api" class="sidebar-link">babel API</a></li><li class="sidebar-sub-header"><a href="/blog/JavaScript/use_babel.html#浏览器环境" class="sidebar-link">浏览器环境</a></li></ul></li><li><a href="/blog/JavaScript/let_const.html" class="sidebar-link">ES6 let 与 const</a></li><li><a href="/blog/JavaScript/destruction.html" class="sidebar-link">ES6 变量的解构赋值</a></li><li><a href="/blog/JavaScript/es6_string.html" class="sidebar-link">ES6 字符串的扩展</a></li><li><a href="/blog/JavaScript/array_expand.html" class="sidebar-link">ES6 数组的扩展</a></li><li><a href="/blog/JavaScript/func_expand.html" class="sidebar-link">ES6 函数的扩展</a></li><li><a href="/blog/JavaScript/obj_expand.html" class="sidebar-link">ES6 对象的扩展</a></li><li><a href="/blog/JavaScript/obj_expand_api.html" class="sidebar-link">ES6 对象新增API</a></li><li><a href="/blog/JavaScript/es6_class_basic.html" class="sidebar-link">ES6 Class基本语法</a></li><li><a href="/blog/JavaScript/es6_class_extend.html" class="sidebar-link">ES6 Class 的继承</a></li></ul> </div> <div class="page"> <div class="content"><h1 id="babel-转码器的使用"><a href="#babel-转码器的使用" aria-hidden="true" class="header-anchor">#</a> Babel 转码器的使用</h1> <p><a href="https://babeljs.io/" target="_blank" rel="noopener noreferrer">Babel<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 是一个广泛使用的 ES6 转码器，可以将 ES6 代码转为 ES5 代码，从而在现有环境执行。这意味着，你可以用 ES6 的方式编写程序，又不用担心现有环境是否支持。下面是一个例子。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 转码前</span>
+input<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>item <span class="token operator">=&gt;</span> item <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 转码后</span>
+input<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>item<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> item <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>上面的原始代码用了箭头函数，Babel 将其转为普通函数，就能在不支持箭头函数的 JavaScript 环境执行了。</p> <p>下面的命令在项目目录中，安装 Babel。</p> <div class="language-sh extra-class"><pre class="language-text"><code>$ npm install --save-dev @babel/core
+</code></pre></div><h2 id="配置文件-babelrc"><a href="#配置文件-babelrc" aria-hidden="true" class="header-anchor">#</a> 配置文件<code>.babelrc</code></h2> <p>Babel 的配置文件是<code>.babelrc</code>，存放在项目的根目录下。使用 Babel 的第一步，就是配置这个文件。</p> <p>该文件用来设置转码规则和插件，基本格式如下。</p> <div class="language-sh extra-class"><pre class="language-text"><code>{
+  &quot;presets&quot;: [],
+  &quot;plugins&quot;: []
+}
+</code></pre></div><p><code>presets</code>字段设定转码规则，官方提供以下的规则集，你可以根据需要安装。</p> <div class="language-sh extra-class"><pre class="language-text"><code># 最新转码规则
+$ npm install --save-dev @babel/preset-env
+
+# react 转码规则
+$ npm install --save-dev @babel/preset-react
+</code></pre></div><p>然后，将这些规则加入<code>.babelrc</code>。</p> <div class="language-sh extra-class"><pre class="language-text"><code>  {
+    &quot;presets&quot;: [
+      &quot;@babel/env&quot;,
+      &quot;@babel/preset-react&quot;
+    ],
+    &quot;plugins&quot;: []
+  }
+</code></pre></div><p>注意，以下所有 Babel 工具和模块的使用，都必须先写好<code>.babelrc</code>。</p> <h2 id="命令行转码"><a href="#命令行转码" aria-hidden="true" class="header-anchor">#</a> 命令行转码</h2> <p>Babel 提供命令行工具<code>@babel/cli</code>，用于命令行转码。</p> <p>它的安装命令如下。</p> <div class="language-sh extra-class"><pre class="language-text"><code>$ npm install --save-dev @babel/cli
+</code></pre></div><p>基本用法如下。</p> <div class="language-sh extra-class"><pre class="language-text"><code># 转码结果输出到标准输出
+$ npx babel example.js
+
+# 转码结果写入一个文件
+# --out-file 或 -o 参数指定输出文件
+$ npx babel example.js --out-file compiled.js
+# 或者
+$ npx babel example.js -o compiled.js
+
+# 整个目录转码
+# --out-dir 或 -d 参数指定输出目录
+$ npx babel src --out-dir lib
+# 或者
+$ npx babel src -d lib
+
+# -s 参数生成source map文件
+$ npx babel src -d lib -s
+</code></pre></div><h2 id="babel-register-模块"><a href="#babel-register-模块" aria-hidden="true" class="header-anchor">#</a> @babel/register 模块</h2> <p><code>@babel/register</code>模块改写<code>require</code>命令，为它加上一个钩子。此后，每当使用<code>require</code>加载<code>.js</code>、<code>.jsx</code>、<code>.es</code>和<code>.es6</code>后缀名的文件，就会先用 Babel 进行转码。</p> <div class="language-sh extra-class"><pre class="language-text"><code>$ npm install --save-dev @babel/register
+</code></pre></div><p>使用时，必须首先加载<code>@babel/register</code>。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// index.js</span>
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@babel/register'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./es6.js'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>需要注意的是，<code>@babel/register</code>只会对<code>require</code>命令加载的文件转码，而不会对当前文件转码。另外，由于它是实时转码，所以只适合在开发环境使用。</p> <h2 id="babel-polyfill-模块"><a href="#babel-polyfill-模块" aria-hidden="true" class="header-anchor">#</a> @babel/polyfill 模块</h2> <p>Babel 默认只转换新的 JavaScript 句法（syntax），而不转换新的 API，比如<code>Iterator</code>、<code>Generator</code>、<code>Set</code>、<code>Map</code>、<code>Proxy</code>、<code>Reflect</code>、<code>Symbol</code>、<code>Promise</code>等全局对象，以及一些定义在全局对象上的方法（比如<code>Object.assign</code>）都不会转码。</p> <p>举例来说，ES6 在<code>Array</code>对象上新增了<code>Array.from</code>方法。Babel 就不会转码这个方法。如果想让这个方法运行，必须使用<code>babel-polyfill</code>，为当前环境提供一个垫片。</p> <p>安装命令如下。</p> <div class="language-sh extra-class"><pre class="language-text"><code>$ npm install --save-dev @babel/polyfill
+</code></pre></div><p>然后，在脚本头部，加入如下一行代码。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token string">'@babel/polyfill'</span><span class="token punctuation">;</span>
+<span class="token comment">// 或者</span>
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@babel/polyfill'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>Babel 默认不转码的 API 非常多，详细清单可以查看<code>babel-plugin-transform-runtime</code>模块的<a href="https://github.com/babel/babel/blob/master/packages/babel-plugin-transform-runtime/src/definitions.js" target="_blank" rel="noopener noreferrer">definitions.js<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>文件。</p> <h2 id="babel-api"><a href="#babel-api" aria-hidden="true" class="header-anchor">#</a> babel API</h2> <p>如果某些代码需要调用 Babel 的 API 进行转码，就要使用<code>@babel/core</code>模块。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> babel <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@babel/core'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 字符串转码</span>
+babel<span class="token punctuation">.</span><span class="token function">transform</span><span class="token punctuation">(</span><span class="token string">'code();'</span><span class="token punctuation">,</span> options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// =&gt; { code, map, ast }</span>
+
+<span class="token comment">// 文件转码（异步）</span>
+babel<span class="token punctuation">.</span><span class="token function">transformFile</span><span class="token punctuation">(</span><span class="token string">'filename.js'</span><span class="token punctuation">,</span> options<span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>err<span class="token punctuation">,</span> result<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  result<span class="token punctuation">;</span> <span class="token comment">// =&gt; { code, map, ast }</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 文件转码（同步）</span>
+babel<span class="token punctuation">.</span><span class="token function">transformFileSync</span><span class="token punctuation">(</span><span class="token string">'filename.js'</span><span class="token punctuation">,</span> options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// =&gt; { code, map, ast }</span>
+
+<span class="token comment">// Babel AST转码</span>
+babel<span class="token punctuation">.</span><span class="token function">transformFromAst</span><span class="token punctuation">(</span>ast<span class="token punctuation">,</span> code<span class="token punctuation">,</span> options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// =&gt; { code, map, ast }</span>
+</code></pre></div><p>配置对象<code>options</code>，可以参看<a href="http://babeljs.io/docs/usage/options/" target="_blank" rel="noopener noreferrer">官方文档<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>。</p> <h2 id="浏览器环境"><a href="#浏览器环境" aria-hidden="true" class="header-anchor">#</a> 浏览器环境</h2> <p>Babel 也可以用于浏览器环境，使用<a href="https://babeljs.io/docs/en/next/babel-standalone.html" target="_blank" rel="noopener noreferrer">@babel/standalone<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>模块提供的浏览器版本，将其插入网页。</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>https://unpkg.com/@babel/standalone/babel.min.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>text/babel<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript">
+<span class="token comment">// Your ES6 code</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p>注意，网页实时将 ES6 代码转为 ES5，<strong>对性能会有影响</strong>。生产环境需要加载已经转码完成的脚本。</p> <p>Babel 提供一个<a href="https://babeljs.io/repl/" target="_blank" rel="noopener noreferrer">REPL 在线编译器<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>，可以在线将 ES6 代码转为 ES5 代码。转换后的代码，可以直接作为 ES5 代码插入网页运行。</p></div> <div class="page-edit"><!----> <!----></div> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/blog/JavaScript/" class="prev router-link-active">
+          Fisher-Yates洗牌算法
+        </a></span> <span class="next"><a href="/blog/JavaScript/let_const.html">
+          ES6 let 与 const
+        </a>
+        →
+      </span></p></div> </div> <!----></div></div>
+    <script src="/assets/js/app.f33563e9.js" defer></script><script src="/assets/js/14.bad14721.js" defer></script>
+  </body>
+</html>

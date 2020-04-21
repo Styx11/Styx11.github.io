@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>devMiddlware 源码解析 | Styx</title>
+    <meta name="description" content="Just playing around">
+    <meta name="generator" content="VuePress 1.3.1">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.69dbb021.css" as="style"><link rel="preload" href="/assets/js/app.a7ad37e5.js" as="script"><link rel="preload" href="/assets/js/2.4c53de9c.js" as="script"><link rel="preload" href="/assets/js/7.8b6ab45f.js" as="script"><link rel="prefetch" href="/assets/js/10.b88fd404.js"><link rel="prefetch" href="/assets/js/11.2dbe17f8.js"><link rel="prefetch" href="/assets/js/12.3719e14b.js"><link rel="prefetch" href="/assets/js/13.1af22a96.js"><link rel="prefetch" href="/assets/js/14.3ee17ff3.js"><link rel="prefetch" href="/assets/js/15.61553de6.js"><link rel="prefetch" href="/assets/js/16.017b159d.js"><link rel="prefetch" href="/assets/js/17.81daa042.js"><link rel="prefetch" href="/assets/js/18.7e144bf0.js"><link rel="prefetch" href="/assets/js/19.aaed5981.js"><link rel="prefetch" href="/assets/js/20.200080a9.js"><link rel="prefetch" href="/assets/js/21.e9387ae9.js"><link rel="prefetch" href="/assets/js/22.4dd38e40.js"><link rel="prefetch" href="/assets/js/23.8a7c5577.js"><link rel="prefetch" href="/assets/js/24.4ba75e8f.js"><link rel="prefetch" href="/assets/js/25.c9f67eff.js"><link rel="prefetch" href="/assets/js/26.ba2ec184.js"><link rel="prefetch" href="/assets/js/27.f6f82899.js"><link rel="prefetch" href="/assets/js/28.3304d296.js"><link rel="prefetch" href="/assets/js/3.89103ff0.js"><link rel="prefetch" href="/assets/js/4.2b2cd21e.js"><link rel="prefetch" href="/assets/js/5.25e441f8.js"><link rel="prefetch" href="/assets/js/6.70d1adeb.js"><link rel="prefetch" href="/assets/js/8.9a3d061f.js"><link rel="prefetch" href="/assets/js/9.1b1c0914.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.69dbb021.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Styx</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Blog" class="dropdown-title"><span class="title">Blog</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/JavaScript/" class="nav-link">
+  JavaScipt
+</a></li><li class="dropdown-item"><!----> <a href="/blog/Node/" class="nav-link">
+  Node
+</a></li><li class="dropdown-item"><!----> <a href="/blog/FontEnd_Construction/" class="nav-link router-link-active">
+  前端构建
+</a></li></ul></div></div><div class="nav-item"><a href="/blog/Projects/" class="nav-link">
+  Projects
+</a></div><div class="nav-item"><a href="https://github.com/Styx11" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Blog" class="dropdown-title"><span class="title">Blog</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/JavaScript/" class="nav-link">
+  JavaScipt
+</a></li><li class="dropdown-item"><!----> <a href="/blog/Node/" class="nav-link">
+  Node
+</a></li><li class="dropdown-item"><!----> <a href="/blog/FontEnd_Construction/" class="nav-link router-link-active">
+  前端构建
+</a></li></ul></div></div><div class="nav-item"><a href="/blog/Projects/" class="nav-link">
+  Projects
+</a></div><div class="nav-item"><a href="https://github.com/Styx11" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/blog/FontEnd_Construction/" class="sidebar-link">Babel 转码器的使用</a></li><li><a href="/blog/FontEnd_Construction/use_eslint.html" class="sidebar-link">ESLint 规范代码</a></li><li><a href="/blog/FontEnd_Construction/module_basic.html" class="sidebar-link">ES6 Module 基本语法</a></li><li><a href="/blog/FontEnd_Construction/ssr_first_part.html" class="sidebar-link">SSR 构建流程（上）</a></li><li><a href="/blog/FontEnd_Construction/ssr_second_part.html" class="sidebar-link">SSR 构建流程（中）</a></li><li><a href="/blog/FontEnd_Construction/ssr_third_part.html" class="sidebar-link">SSR 构建流程（下）</a></li><li><a href="/blog/FontEnd_Construction/devMiddleware.html" class="active sidebar-link">devMiddlware 源码解析</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/FontEnd_Construction/devMiddleware.html#前言" class="sidebar-link">前言</a></li><li class="sidebar-sub-header"><a href="/blog/FontEnd_Construction/devMiddleware.html#这是什么？" class="sidebar-link">这是什么？</a></li><li class="sidebar-sub-header"><a href="/blog/FontEnd_Construction/devMiddleware.html#它做了什么？" class="sidebar-link">它做了什么？</a></li><li class="sidebar-sub-header"><a href="/blog/FontEnd_Construction/devMiddleware.html#这一切是如何发生的" class="sidebar-link">这一切是如何发生的</a></li><li class="sidebar-sub-header"><a href="/blog/FontEnd_Construction/devMiddleware.html#写在最后" class="sidebar-link">写在最后</a></li></ul></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="devmiddlware-源码解析"><a href="#devmiddlware-源码解析" class="header-anchor">#</a> devMiddlware 源码解析</h1> <div class="custom-block tip"><p class="custom-block-title">提示</p> <p>文章所描述的构建场景基于 Koa2 和 Webpack4</p> <p>使用依赖版本以及样例源码参考 <a href="https://github.com/Styx11/vue-ssr-base" target="_blank" rel="noopener noreferrer">https://github.com/Styx11/vue-ssr-base<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><strong>原创文章，转载请联系作者<a href="https://github.com/Styx11" target="_blank" rel="noopener noreferrer">Styx<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>！</strong></p></div> <h2 id="前言"><a href="#前言" class="header-anchor">#</a> 前言</h2> <p>这篇源码分析我本来是作为 <a href="/blog/FontEnd_Construction/ssr_third_part.html">Vue SSR 的构建流程</a>顺带介绍的，但是写着写着突然发现需要解释的东西还是挺多的已经超出了原来的计划，所以我决定另出一篇解析来总结在阅读源码的过程中我所学到的。希望这篇文章可以帮助你理解 Webpack 和中间件<code>webpack-dev-middleware</code>是如何相互协调工作的:)</p> <p>注意：英文注释是源码作者标注的，中文注释是我额外添加的，这些可以帮助你更好地理解代码</p> <h2 id="这是什么？"><a href="#这是什么？" class="header-anchor">#</a> 这是什么？</h2> <p>Webpack 提供了几种可选的模式帮助我们在源码变更后自动编译，而不是每次手动调用<code>npm run build</code>。</p> <ol><li>webpack watch mode(webpack 观察模式)</li> <li>webpack-dev-server</li> <li>webpack-dev-middleware</li></ol> <p>在普通的开发过程中最常用的就是<code>webpack-dev-server</code>了，但它提供默认的服务器无法与现有的服务端代码结合，那么这个时候我们就要使用<code>webpack-dev-middleware</code>进行定制，并决定在源码更新时应该做哪些事情，这也是<code>webpack-dev-server</code>内部使用的中间件。</p> <p>下面是将<code>webpack-dev-middleware</code>和一个<code>express</code>服务器结合的简单例子（中间件内部使用类 Express API）：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'express'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> webpack <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'webpack'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> config <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'webpack.example.js'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> webpackDevMiddleware <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'webpack-dev-middleware'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> complier <span class="token operator">=</span> <span class="token function">webpack</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> middleware <span class="token operator">=</span> <span class="token function">webpackDevMiddleware</span><span class="token punctuation">(</span>complier<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  publicPath<span class="token operator">:</span> config<span class="token punctuation">.</span>output<span class="token punctuation">.</span>publicPath
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>middleware<span class="token punctuation">)</span>；
+app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">8080</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>我们运行这个文件将服务器在根路径启动可以在终端看到以下信息：</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token punctuation">..</span>.
+          Asset       Size  Chunks                    Chunk Names
+  app.bundle.js    <span class="token number">1.44</span> MB    <span class="token number">0</span>, <span class="token number">1</span>  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  app
+print.bundle.js    <span class="token number">6.57</span> kB       <span class="token number">1</span>  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         print
+     index.html  <span class="token number">306</span> bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
+<span class="token punctuation">..</span>.
+</code></pre></div><p>在浏览器中打开<code>loalhost:8080</code>，然后输入以<code>publicPath</code>开头的你在<code>output.filename</code>定义的文件名<code>url</code>，就能看到打包的文件内容了。例如<a href="/blog/FontEnd_Construction/ssr_second_part.html#静态文件服务">中篇</a>的例子：</p> <p><img src="https://s1.ax1x.com/2020/04/14/GxWd1g.png" alt="资源请求">
+这也是<code>webpack-dev-middleware</code>的<strong>主要</strong>工作——通过服务器提供编译后的打包文件。</p> <p>那么这个“devMiddleware”是如何做到这些的？它是如何改变<code>complier</code>的行为（开启监听模式、检查文件是否该被写入磁盘）、如何响应文件请求，又是为什么无法直接与一个 Koa2 服务器直接结合？在这篇总结中我将向你展示在源码层面这一切是如何进行的。</p> <p>我们参考<a href="https://github.com/webpack/webpack-dev-middleware/tree/v3.7.2" target="_blank" rel="noopener noreferrer">webpack-dev-middleware v3.7.2<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>的源码并做以精简，以便快速地展示这一过程。</p> <h2 id="它做了什么？"><a href="#它做了什么？" class="header-anchor">#</a> 它做了什么？</h2> <p>我们从<a href="https://github.com/webpack/webpack-dev-middleware/blob/v3.7.2/index.js" target="_blank" rel="noopener noreferrer">webpack-dev-middleware/index.js<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>入口文件开始，看看它主要做了哪些工作：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">//...</span>
+<span class="token keyword">const</span> createContext <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./lib/context'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> middleware <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./lib/middleware'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span> setFs<span class="token punctuation">,</span> toDisk <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./lib/fs'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// middleware 函数默认参数</span>
+<span class="token keyword">const</span> defaults <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">//...</span>
+  stats<span class="token operator">:</span> <span class="token punctuation">{</span>
+    context<span class="token operator">:</span> process<span class="token punctuation">.</span><span class="token function">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  writeToDisk<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token function">wdm</span><span class="token punctuation">(</span><span class="token parameter">compiler<span class="token punctuation">,</span> opts</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> options <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> defaults<span class="token punctuation">,</span> opts<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> context <span class="token operator">=</span> <span class="token function">createContext</span><span class="token punctuation">(</span>compiler<span class="token punctuation">,</span> options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">//...</span>
+
+  <span class="token comment">// 开启 complier 的监听模式自动编译变更的源文件</span>
+  <span class="token comment">// 这样每次有文件请求，middleware 都会尝试去读取这些编译文件</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>options<span class="token punctuation">.</span>lazy<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    context<span class="token punctuation">.</span>watching <span class="token operator">=</span> compiler<span class="token punctuation">.</span><span class="token function">watch</span><span class="token punctuation">(</span>options<span class="token punctuation">.</span>watchOptions<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token comment">//...</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token comment">//...</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// 传入的 writeToDisk 属性可以是一个 filter 函数</span>
+  <span class="token comment">// 在 complier 相关钩子中注册函数以检查是否应该写入</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>options<span class="token punctuation">.</span>writeToDisk<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">toDisk</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// 设置用于读取文件的fs，由于 complier.outputFileSystem 是可自定义的</span>
+  <span class="token comment">// 所以这一步会检查它并设置中间件内部的 context.fs，再通过 middleware.fileSystem 向用户暴露</span>
+  <span class="token comment">// 若用户未定义，则将它们设置为 MemoryFileSystem 的实例</span>
+  <span class="token comment">// 注意，无论那种情况它们引用的都是同一个fs，这样才能在使用 MemoryFileSystem 的情况下读取到相同的文件</span>
+  <span class="token function">setFs</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> compiler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 返回配置过的 middleware 实例</span>
+  <span class="token keyword">return</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token function">middleware</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token comment">// close 钩子，关闭监听模式</span>
+    <span class="token function">close</span><span class="token punctuation">(</span><span class="token parameter">callback</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      callback <span class="token operator">=</span> callback <span class="token operator">||</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>context<span class="token punctuation">.</span>watching<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        context<span class="token punctuation">.</span>watching<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span>callback<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token comment">//...</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+    context<span class="token punctuation">,</span>
+
+    <span class="token comment">// 向外暴露给用户访问文件，和 complier.outputFileSystem 引用同一个fs。</span>
+    fileSystem<span class="token operator">:</span> context<span class="token punctuation">.</span>fs<span class="token punctuation">,</span>
+    <span class="token comment">//...</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>总结一下以上代码的内容，<code>devMiddleware</code>主要做了三项工作：开启<code>complier</code>的监听模式、处理文件系统的相关任务、返回中间件。因为<code>toDisk</code>和<code>setFs</code>在一个文件中，所以我将它们放在一起介绍。</p> <p>我们先来看看关于文件系统<a href="https://github.com/webpack/webpack-dev-middleware/blob/v3.7.2/lib/fs.js" target="_blank" rel="noopener noreferrer">webpack-dev-middleware/lib/fs.js<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>的代码。</p> <p>第一部分：如果用户选择将编译文件写入磁盘，也就是传入<code>writeToDisk</code>参数，那么<code>toDisk</code>函数会在<code>complier</code>实例上注册钩子函数，并使用<code>writeToDisk</code>作为 filter 判断是否写入</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// lib/fs.js</span>
+<span class="token comment">//...</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 写入磁盘相关函数</span>
+  <span class="token function">toDisk</span><span class="token punctuation">(</span><span class="token parameter">context</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">//...</span>
+    <span class="token comment">// 编译内容写入到 output 之前的钩子</span>
+    compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>emit<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span><span class="token string">'WebpackDevMiddleware'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">compilation</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token comment">// ...</span>
+      <span class="token comment">// 资源写入时钩子</span>
+      compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>assetEmitted<span class="token punctuation">.</span><span class="token function">tapAsync</span><span class="token punctuation">(</span>
+        <span class="token string">'WebpackDevMiddleware'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">(</span><span class="token parameter">file<span class="token punctuation">,</span> info<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+          <span class="token comment">// ...</span>
+          <span class="token keyword">let</span> <span class="token punctuation">{</span> targetPath<span class="token punctuation">,</span> content <span class="token punctuation">}</span> <span class="token operator">=</span> info<span class="token punctuation">;</span>
+
+          <span class="token comment">// 获取 filter 函数</span>
+          <span class="token keyword">const</span> <span class="token punctuation">{</span> writeToDisk<span class="token operator">:</span> filter <span class="token punctuation">}</span> <span class="token operator">=</span> context<span class="token punctuation">.</span>options<span class="token punctuation">;</span>
+          <span class="token keyword">const</span> allowWrite <span class="token operator">=</span>
+            filter <span class="token operator">&amp;&amp;</span> <span class="token keyword">typeof</span> filter <span class="token operator">===</span> <span class="token string">'function'</span>
+              <span class="token operator">?</span> <span class="token function">filter</span><span class="token punctuation">(</span>targetPath<span class="token punctuation">)</span>
+              <span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+
+          <span class="token comment">// 若检查失败则取消写入</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>allowWrite<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token function">callback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+          <span class="token comment">// 将资源覆盖写入磁盘</span>
+          <span class="token keyword">const</span> dir <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>targetPath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">return</span> <span class="token function">mkdirp</span><span class="token punctuation">(</span>dir<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">mkdirpError</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token comment">//...</span>
+            <span class="token keyword">return</span> fs<span class="token punctuation">.</span><span class="token function">writeFile</span><span class="token punctuation">(</span>targetPath<span class="token punctuation">,</span> content<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">writeFileError</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+              <span class="token comment">//...</span>
+              <span class="token keyword">return</span> <span class="token function">callback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>第二部分：处理文件系统，中间件使用<code>setFs</code>函数让<code>complier</code>和<code>middleware</code>引用同一个文件系统，并设置内部使用的<code>context.fs</code>，这也就是为什么即使访问不同的对象，我们也可以通过它们的文件系统读取到相同的编译文件（<code>complier.outputFileSystem</code>和<code>middleware.fileSystem</code>）。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// lib/fs.js</span>
+<span class="token comment">//...</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">//...</span>
+  <span class="token comment">// 设置文件系统</span>
+  <span class="token function">setFs</span><span class="token punctuation">(</span><span class="token parameter">context<span class="token punctuation">,</span> compiler</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">//...</span>
+    <span class="token keyword">let</span> fileSystem<span class="token punctuation">;</span>
+
+    <span class="token comment">// 检查用户是否已经配置了文件系统</span>
+    <span class="token keyword">const</span> isConfiguredFs <span class="token operator">=</span> context<span class="token punctuation">.</span>options<span class="token punctuation">.</span>fs<span class="token punctuation">;</span>
+    <span class="token keyword">const</span> isMemoryFs <span class="token operator">=</span>
+      <span class="token operator">!</span>isConfiguredFs <span class="token operator">&amp;&amp;</span>
+      <span class="token operator">!</span>compiler<span class="token punctuation">.</span>compilers <span class="token operator">&amp;&amp;</span>
+      compiler<span class="token punctuation">.</span>outputFileSystem <span class="token keyword">instanceof</span> <span class="token class-name">MemoryFileSystem</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isConfiguredFs<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 使用用户自定义的文件系统</span>
+      <span class="token keyword">const</span> <span class="token punctuation">{</span> fs <span class="token punctuation">}</span> <span class="token operator">=</span> context<span class="token punctuation">.</span>options<span class="token punctuation">;</span>
+      <span class="token comment">//...</span>
+      compiler<span class="token punctuation">.</span>outputFileSystem <span class="token operator">=</span> fs<span class="token punctuation">;</span>
+      fileSystem <span class="token operator">=</span> fs<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>isMemoryFs<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 已经设置为 MFS</span>
+      fileSystem <span class="token operator">=</span> compiler<span class="token punctuation">.</span>outputFileSystem<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 否则默认将它们设为 MFS</span>
+      fileSystem <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MemoryFileSystem</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      compiler<span class="token punctuation">.</span>outputFileSystem <span class="token operator">=</span> fileSystem<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 最后 context.fs、middleware.fileSystem、complier.outputFileSystem 引用的是同一个fs</span>
+    context<span class="token punctuation">.</span>fs <span class="token operator">=</span> fileSystem<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>如果不这么做，在使用<code>MemoryFileSystem</code>的情况下各个实例会将文件读取到各自的内存块中，不同实例之间无法互通文件，我们的中间件也就无法为我们提供编译文件了。</p> <p>之后就是关键部分了，让我们来看看最后返回的<code>middleware</code>对象内部发生了什么。</p> <h2 id="这一切是如何发生的"><a href="#这一切是如何发生的" class="header-anchor">#</a> 这一切是如何发生的</h2> <p>这一切是如何运作的呢？devMiddleware 如何处理进来的请求、什么时候读取编译文件？我们从<code>middleware</code>对象的<a href="https://github.com/webpack/webpack-dev-middleware/blob/v3.7.2/lib/middleware.js" target="_blank" rel="noopener noreferrer">入口文件<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>看起：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// lib/middleware.js</span>
+<span class="token keyword">const</span> mime <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mime'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span>
+  getFilenameFromUrl<span class="token punctuation">,</span>
+  handleRequest<span class="token punctuation">,</span>
+  ready<span class="token punctuation">,</span>
+<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./util'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token function">wrapper</span><span class="token punctuation">(</span><span class="token parameter">context</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token function">middleware</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    res<span class="token punctuation">.</span>locals <span class="token operator">=</span> res<span class="token punctuation">.</span>locals <span class="token operator">||</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 在合适的时机调用 next() 移交控制权</span>
+    <span class="token keyword">function</span> <span class="token function">goNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token function">ready</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+          res<span class="token punctuation">.</span>locals<span class="token punctuation">.</span>webpackStats <span class="token operator">=</span> context<span class="token punctuation">.</span>webpackStats<span class="token punctuation">;</span>
+          res<span class="token punctuation">.</span>locals<span class="token punctuation">.</span>fs <span class="token operator">=</span> context<span class="token punctuation">.</span>fs<span class="token punctuation">;</span>
+          <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> req<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">//...</span>
+    <span class="token keyword">let</span> filename <span class="token operator">=</span> <span class="token function">getFilenameFromUrl</span><span class="token punctuation">(</span>
+      context<span class="token punctuation">.</span>options<span class="token punctuation">.</span>publicPath<span class="token punctuation">,</span>
+      context<span class="token punctuation">.</span>compiler<span class="token punctuation">,</span>
+      req<span class="token punctuation">.</span>url
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 若这个并不是文件请求，goNext 移交控制权</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>filename <span class="token operator">===</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token function">goNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// middleware 主体</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 在适当的时机调用 processRequest 处理请求</span>
+      <span class="token function">handleRequest</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> filename<span class="token punctuation">,</span> processRequest<span class="token punctuation">,</span> req<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      <span class="token keyword">function</span> <span class="token function">processRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> stat <span class="token operator">=</span> context<span class="token punctuation">.</span>fs<span class="token punctuation">.</span><span class="token function">statSync</span><span class="token punctuation">(</span>filename<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 若无法找到请求文件，调用 goNext</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>stat<span class="token punctuation">.</span><span class="token function">isFile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token function">goNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">//...</span>
+
+        <span class="token comment">// 读取请求文件</span>
+        <span class="token keyword">let</span> content <span class="token operator">=</span> context<span class="token punctuation">.</span>fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span>filename<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> contentType <span class="token operator">=</span> mime<span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span>filename<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token string">''</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">//...</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>res<span class="token punctuation">.</span>getHeader <span class="token operator">||</span> <span class="token operator">!</span>res<span class="token punctuation">.</span><span class="token function">getHeader</span><span class="token punctuation">(</span><span class="token string">'Content-Type'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          res<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">'Content-Type'</span><span class="token punctuation">,</span> contentType<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        res<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">'Content-Length'</span><span class="token punctuation">,</span> content<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">//...</span>
+        <span class="token comment">// Express automatically sets the statusCode to 200, but not all servers do (Koa).</span>
+        res<span class="token punctuation">.</span>statusCode <span class="token operator">=</span> res<span class="token punctuation">.</span>statusCode <span class="token operator">||</span> <span class="token number">200</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token punctuation">.</span>send<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+          res<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        
+        <span class="token comment">// 最终 resolve 请求</span>
+        <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>通过上述代码我们可以看到，中间件在内部默认调用了类 Express API 去处理请求而不是 Koa2，并且有一点特别突出：devMiddleware <strong>仅仅</strong>处理打包文件的请求。</p> <p>同时不论是<code>goNext</code>移交控制权还是使用<code>handleRequest</code>处理请求，中间件都不会立即调用相关函数而是返回一个<code>Promise</code>等待结果，我们进入<code>handleRequest</code>函数内部可以看到它和<code>goNext</code>一样调用了<code>ready(processRequest)</code>，也就是说它们都将真正的处理函数传入了<code>ready</code>函数内等待合适的时机执行。</p> <p>让我们来看看<code>ready</code>函数做了什么：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// lib/util.js</span>
+<span class="token comment">//...</span>
+<span class="token keyword">function</span> <span class="token function">ready</span><span class="token punctuation">(</span><span class="token parameter">context<span class="token punctuation">,</span> fn<span class="token punctuation">,</span> req</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// true 则立即调用 fn</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>context<span class="token punctuation">.</span>state<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">fn</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span>webpackStats<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// 否则存入 context.callbacks 中 “wait until bundle finished” 调用</span>
+  context<span class="token punctuation">.</span>log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">wait until bundle finished: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>req<span class="token punctuation">.</span>url <span class="token operator">||</span> fn<span class="token punctuation">.</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  context<span class="token punctuation">.</span>callbacks<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>fn<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//...</span>
+</code></pre></div><p><code>ready</code>检查<code>context.state</code>的值，决定是立即执行<code>fn</code>，比如之前的<code>processRequest</code>，还是暂存入<code>context.callbacks</code>中。</p> <p>源码提示我们当<code>bundle</code>准备好，<code>context.state</code>为<code>true</code>时，<code>callbacks</code>中的回调函数才会被调用，在最开始的入口文件可以找到创建这个全局上下文<code>context</code>的代码：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">//index.js</span>
+<span class="token keyword">const</span> createContext <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./lib/context'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//...</span>
+
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token function">wdm</span><span class="token punctuation">(</span><span class="token parameter">compiler<span class="token punctuation">,</span> opts</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> options <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> defaults<span class="token punctuation">,</span> opts<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> context <span class="token operator">=</span> <span class="token function">createContext</span><span class="token punctuation">(</span>compiler<span class="token punctuation">,</span> options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">//...</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>然后在<a href="https://github.com/webpack/webpack-dev-middleware/blob/v3.7.2/lib/context.js" target="_blank" rel="noopener noreferrer">webpack-dev-middleware/lib/context.js<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>的源码中就能找到这个<strong>真正</strong>驱动整个中间件运作的关键——注册<code>complier</code>钩子，从而在合适的时间做合适的操作。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// lib/context.js</span>
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token function">ctx</span><span class="token punctuation">(</span><span class="token parameter">compiler<span class="token punctuation">,</span> options</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> context <span class="token operator">=</span> <span class="token punctuation">{</span>
+    state<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    callbacks<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    compiler<span class="token punctuation">,</span>
+    <span class="token comment">//...</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 编译完成钩子函数</span>
+  <span class="token keyword">function</span> <span class="token function">done</span><span class="token punctuation">(</span><span class="token parameter">stats</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// We are now on valid state</span>
+    context<span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    context<span class="token punctuation">.</span>webpackStats <span class="token operator">=</span> stats<span class="token punctuation">;</span>
+
+    <span class="token comment">// Do the stuff in nextTick, because bundle may be invalidated</span>
+    <span class="token comment">// if a change happened while compiling</span>
+    process<span class="token punctuation">.</span><span class="token function">nextTick</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token comment">// check if still in valid state</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>context<span class="token punctuation">.</span>state<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token comment">// execute callback that are delayed</span>
+      <span class="token keyword">const</span> cbs <span class="token operator">=</span> context<span class="token punctuation">.</span>callbacks<span class="token punctuation">;</span>
+      context<span class="token punctuation">.</span>callbacks <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+      cbs<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">cb</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token function">cb</span><span class="token punctuation">(</span>stats<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//...</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// 编译无效钩子函数</span>
+  <span class="token keyword">function</span> <span class="token function">invalid</span><span class="token punctuation">(</span><span class="token parameter">callback</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">//...</span>
+    <span class="token comment">// We are now in invalid state</span>
+    context<span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> callback <span class="token operator">===</span> <span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">callback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">//...</span>
+  
+  <span class="token comment">// 注册 complier 钩子</span>
+  context<span class="token punctuation">.</span>compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>invalid<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span><span class="token string">'WebpackDevMiddleware'</span><span class="token punctuation">,</span> invalid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  context<span class="token punctuation">.</span>compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>run<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span><span class="token string">'WebpackDevMiddleware'</span><span class="token punctuation">,</span> invalid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  context<span class="token punctuation">.</span>compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>done<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span><span class="token string">'WebpackDevMiddleware'</span><span class="token punctuation">,</span> done<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  context<span class="token punctuation">.</span>compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>watchRun<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span>
+    <span class="token string">'WebpackDevMiddleware'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">(</span><span class="token parameter">comp<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token function">invalid</span><span class="token punctuation">(</span>callback<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> context<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p><code>middleware</code>注册了 Webpack 实例<code>complier</code>的编译钩子，在不同阶段中设置<code>context.state</code>的值以决定是否执行处理函数。</p> <p>那么到此整个中间件的运作过程可以简述如下：</p> <ol><li>注册<code>complier</code>钩子和一个全局属性<code>context.state</code>，从而控制<code>middleware</code>处理请求</li> <li>第一次或重新编译时，在<code>invalid</code>函数中设<code>context.state</code>为<code>false</code>，<code>middleware</code>就将请求的处理函数存入<code>callbacks</code>等待处理（返回一个<code>Promise</code>）</li> <li>编译完成后在<code>done</code>函数中设<code>context.state</code>为<code>true</code>，<code>middleware</code>执行<code>callbacks</code>中的处理函数并且之后的请求都会被立即处理</li> <li><code>middleware</code>要么处理一个编译文件的请求，要么<code>goNext</code>移交控制权。</li></ol> <h2 id="写在最后"><a href="#写在最后" class="header-anchor">#</a> 写在最后</h2> <p><code>webpack-dev-middleware</code>借助 <code>complier</code> 提供的编译钩子修改全局上下文<code>context</code>从而驱动自身的运作，这是它们之间的联系；在这个过程里中间件开启 Webpack 监听模式（watch mode）并修改双方存取编译文件的 fs（<code>complier.outputFileSystem</code>和<code>middleware.fileSystem</code>）使得它们可以在一致的内存块中工作，这是相互协调。如果我们需要在一个 Koa2 服务器上添加这个中间件，根据上面的介绍可以很容易的针对它使用的类 Express API 做适配，就像我的<a href="https://github.com/Styx11/vue-ssr-base/blob/master/lib/devMiddleware.js#L36" target="_blank" rel="noopener noreferrer">样例库<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>展示的那样。</p> <p>以上就是这篇源码解析的全部内容了，真心希望这对你有所帮助，如果遇到任何问题你可以在 github 上找到我👉<a href="https://github.com/Styx11" target="_blank" rel="noopener noreferrer">Styx<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/blog/FontEnd_Construction/ssr_third_part.html" class="prev">
+        SSR 构建流程（下）
+      </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.a7ad37e5.js" defer></script><script src="/assets/js/2.4c53de9c.js" defer></script><script src="/assets/js/7.8b6ab45f.js" defer></script>
+  </body>
+</html>

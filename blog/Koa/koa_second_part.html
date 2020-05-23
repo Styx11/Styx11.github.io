@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Koa 源码解析（二） | Styx</title>
+    <meta name="description" content="Just playing around">
+    <meta name="generator" content="VuePress 1.3.1">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.86c6422a.css" as="style"><link rel="preload" href="/assets/js/app.911218fd.js" as="script"><link rel="preload" href="/assets/js/2.5af35e1d.js" as="script"><link rel="preload" href="/assets/js/29.765aa3fb.js" as="script"><link rel="preload" href="/assets/js/5.4194a820.js" as="script"><link rel="preload" href="/assets/js/4.fa04dc2a.js" as="script"><link rel="prefetch" href="/assets/js/10.bd053a74.js"><link rel="prefetch" href="/assets/js/11.e7a1b99d.js"><link rel="prefetch" href="/assets/js/12.8f52bac9.js"><link rel="prefetch" href="/assets/js/13.1d4497c3.js"><link rel="prefetch" href="/assets/js/14.a56cbb69.js"><link rel="prefetch" href="/assets/js/15.c21b4e0c.js"><link rel="prefetch" href="/assets/js/16.a2362319.js"><link rel="prefetch" href="/assets/js/17.8d3f8cb1.js"><link rel="prefetch" href="/assets/js/18.6e84deac.js"><link rel="prefetch" href="/assets/js/19.0f2a7f69.js"><link rel="prefetch" href="/assets/js/20.f9aa3a1f.js"><link rel="prefetch" href="/assets/js/21.16ad1c89.js"><link rel="prefetch" href="/assets/js/22.211993b9.js"><link rel="prefetch" href="/assets/js/23.a8777dcc.js"><link rel="prefetch" href="/assets/js/24.6306a1d9.js"><link rel="prefetch" href="/assets/js/25.5c96a5ee.js"><link rel="prefetch" href="/assets/js/26.003797da.js"><link rel="prefetch" href="/assets/js/27.90ed7e7c.js"><link rel="prefetch" href="/assets/js/28.8c42289a.js"><link rel="prefetch" href="/assets/js/3.f8452016.js"><link rel="prefetch" href="/assets/js/30.be6cb1d5.js"><link rel="prefetch" href="/assets/js/31.baa7d2a8.js"><link rel="prefetch" href="/assets/js/32.cb05c164.js"><link rel="prefetch" href="/assets/js/33.f7a86bc5.js"><link rel="prefetch" href="/assets/js/34.304ceef7.js"><link rel="prefetch" href="/assets/js/6.1d590000.js"><link rel="prefetch" href="/assets/js/7.aabfe24d.js"><link rel="prefetch" href="/assets/js/8.d118a973.js"><link rel="prefetch" href="/assets/js/9.b2eedd7a.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.86c6422a.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Styx</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Blog" class="dropdown-title"><span class="title">Blog</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/Koa/" class="nav-link router-link-active">
+  Koa
+</a></li><li class="dropdown-item"><!----> <a href="/blog/Node/" class="nav-link">
+  Node
+</a></li><li class="dropdown-item"><!----> <a href="/blog/FontEnd_Construction/" class="nav-link">
+  前端构建
+</a></li><li class="dropdown-item"><!----> <a href="/blog/JavaScript/" class="nav-link">
+  JavaScipt
+</a></li></ul></div></div><div class="nav-item"><a href="/blog/Projects/" class="nav-link">
+  Projects
+</a></div><div class="nav-item"><a href="https://github.com/Styx11" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Blog" class="dropdown-title"><span class="title">Blog</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/Koa/" class="nav-link router-link-active">
+  Koa
+</a></li><li class="dropdown-item"><!----> <a href="/blog/Node/" class="nav-link">
+  Node
+</a></li><li class="dropdown-item"><!----> <a href="/blog/FontEnd_Construction/" class="nav-link">
+  前端构建
+</a></li><li class="dropdown-item"><!----> <a href="/blog/JavaScript/" class="nav-link">
+  JavaScipt
+</a></li></ul></div></div><div class="nav-item"><a href="/blog/Projects/" class="nav-link">
+  Projects
+</a></div><div class="nav-item"><a href="https://github.com/Styx11" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/blog/Koa/" class="sidebar-link">Koa 源码解析（一）</a></li><li><a href="/blog/Koa/koa_second_part.html" class="active sidebar-link">Koa 源码解析（二）</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/Koa/koa_second_part.html#总览" class="sidebar-link">总览</a></li><li class="sidebar-sub-header"><a href="/blog/Koa/koa_second_part.html#app-callback" class="sidebar-link">app.callback()</a></li><li class="sidebar-sub-header"><a href="/blog/Koa/koa_second_part.html#koa-compose" class="sidebar-link">koa-compose</a></li><li class="sidebar-sub-header"><a href="/blog/Koa/koa_second_part.html#handlerequest" class="sidebar-link">handleRequest()</a></li></ul></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="koa-源码解析（二）"><a href="#koa-源码解析（二）" class="header-anchor">#</a> Koa 源码解析（二）</h1> <div class="custom-block tip"><p class="custom-block-title">提示</p> <p>本源码解析参考 <a href="https://github.com/koajs/koa/tree/2.11.0" target="_blank" rel="noopener noreferrer">Koa v2.11.0<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 版本代码</p> <p><strong>原创文章，转载请联系作者<a href="https://github.com/Styx11" target="_blank" rel="noopener noreferrer">Styx<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>！</strong></p></div> <p>从这里开始我将正式向你介绍 koa 的源码内容，这篇解析重点关注 koa 在<strong>功能上是怎样运行</strong>的，也就是它如何注册并执行中间件、如何使用默认的错误处理，又是如何返回适用于<code>http.createServer</code>方法的回调函数来处理请求的，到了下一篇我们再看关于上下文<code>context</code>的内容。我会先总览 koa 的入口代码让读者又一个大致印象，再从关键代码开始探究它背后的原理。</p> <p>我将源码的一些内容做了精简以关注它主要的内容，其中英文注释是源码作者标注的，中文注释是我额外添加的，这样可以帮助你更好地理解代码。</p> <h2 id="总览"><a href="#总览" class="header-anchor">#</a> 总览</h2> <p>一个最基本的 koa 应用会像下面这样：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> Koa <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Koa</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token parameter">ctx</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token string">'Hello'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">8080</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>用户先通过<code>new Koa()</code>初始化一个 koa 对象，然后使用<code>app.use</code>注册中间件，最后调用<code>app.listen</code>创建服务器并监听请求。</p> <p>让我们从 koa 的入口开始看看它做了什么，也就是我们调用<code>new Koa()</code>时执行的代码，它在 <a href="https://github.com/koajs/koa/blob/2.11.0/lib/application.js" target="_blank" rel="noopener noreferrer">koa/lib/application.js<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>文件中：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token string">'use strict'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> isGeneratorFunction <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'is-generator-function'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> onFinished <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'on-finished'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> compose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa-compose'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> Emitter <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'events'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> util <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'util'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> Stream <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'stream'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> http <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'http'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> convert <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa-convert'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * Expose `Application` class.
+ * Inherits from `Emitter.prototype`.
+ */</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">class</span> <span class="token class-name">Application</span> <span class="token keyword">extends</span> <span class="token class-name">Emitter</span> <span class="token punctuation">{</span>
+
+  <span class="token comment">// Initialize a new `Application`.</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">options</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    options <span class="token operator">=</span> options <span class="token operator">||</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token comment">//...</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>env <span class="token operator">=</span> options<span class="token punctuation">.</span>env <span class="token operator">||</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">||</span> <span class="token string">'development'</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>middleware <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token comment">//...</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// Use the given middleware `fn`.</span>
+  <span class="token comment">// Old-style middleware will be converted.</span>
+  <span class="token comment">// 注册中间件，它会转换 generator 风格的函数</span>
+  <span class="token function">use</span><span class="token punctuation">(</span><span class="token parameter">fn</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> fn <span class="token operator">!==</span> <span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">TypeError</span><span class="token punctuation">(</span><span class="token string">'middleware must be a function!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isGeneratorFunction</span><span class="token punctuation">(</span>fn<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">//...</span>
+      fn <span class="token operator">=</span> <span class="token function">convert</span><span class="token punctuation">(</span>fn<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>middleware<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>fn<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// Shorthand for:</span>
+  <span class="token comment">// http.createServer(app.callback()).listen(...)</span>
+  <span class="token function">listen</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> server <span class="token operator">=</span> http<span class="token punctuation">.</span><span class="token function">createServer</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">callback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> server<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// Return a request handler callback</span>
+  <span class="token comment">// for node's native http server.</span>
+  <span class="token function">callback</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// koa-compose 返回一个会从第一个中间件开始执行的函数，我们之后再看它</span>
+    <span class="token keyword">const</span> fn <span class="token operator">=</span> <span class="token function">compose</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>middleware<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 注册默认的服务端错误处理，error 事件会在中间件运行发生错误时抛出</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">listenerCount</span><span class="token punctuation">(</span><span class="token string">'error'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'error'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>onerror<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 返回适用于 http.createServer() 方法的回调函数</span>
+    <span class="token keyword">const</span> <span class="token function-variable function">handleRequest</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> ctx <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">createContext</span><span class="token punctuation">(</span>req<span class="token punctuation">,</span> res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">handleRequest</span><span class="token punctuation">(</span>ctx<span class="token punctuation">,</span> fn<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> handleRequest<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// Initialize a new context.</span>
+  <span class="token function">createContext</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">//...</span>
+    <span class="token comment">// 我将在下篇介绍上下文的具体细节</span>
+    <span class="token comment">// 这里我们只需要知道 createContext 会创建上下文并代理 koa response 和 koa request 对象</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// Default error handler.</span>
+  <span class="token function">onerror</span><span class="token punctuation">(</span><span class="token parameter">err</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>err <span class="token keyword">instanceof</span> <span class="token class-name">Error</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">TypeError</span><span class="token punctuation">(</span>util<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">'non-error thrown: %j'</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token number">404</span> <span class="token operator">==</span> err<span class="token punctuation">.</span>status <span class="token operator">||</span> err<span class="token punctuation">.</span>expose<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>silent<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">const</span> msg <span class="token operator">=</span> err<span class="token punctuation">.</span>stack <span class="token operator">||</span> err<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex">/^/gm</span><span class="token punctuation">,</span> <span class="token string">'  '</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// Handle request in callback.</span>
+  <span class="token function">handleRequest</span><span class="token punctuation">(</span><span class="token parameter">ctx<span class="token punctuation">,</span> fnMiddleware</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> res <span class="token operator">=</span> ctx<span class="token punctuation">.</span>res<span class="token punctuation">;</span>
+    res<span class="token punctuation">.</span>statusCode <span class="token operator">=</span> <span class="token number">404</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 这里的 ctx.onerror 才是中间件运行期间使用的错误处理函数</span>
+    <span class="token comment">// 它会向客户端返回 404 并向服务端发送 error 事件打印错误</span>
+    <span class="token keyword">const</span> <span class="token function-variable function">onerror</span> <span class="token operator">=</span> <span class="token parameter">err</span> <span class="token operator">=&gt;</span> ctx<span class="token punctuation">.</span><span class="token function">onerror</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token function-variable function">handleResponse</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">respond</span><span class="token punctuation">(</span>ctx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">onFinished</span><span class="token punctuation">(</span>res<span class="token punctuation">,</span> onerror<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 这里我们就可以大致看到 koa 的运行流程：</span>
+    <span class="token comment">// 先执行中间件，再调用 respond 返回响应</span>
+    <span class="token keyword">return</span> <span class="token function">fnMiddleware</span><span class="token punctuation">(</span>ctx<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>handleResponse<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span>onerror<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Response helper.</span>
+<span class="token keyword">function</span> <span class="token function">respond</span><span class="token punctuation">(</span><span class="token parameter">ctx</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> res <span class="token operator">=</span> ctx<span class="token punctuation">.</span>res<span class="token punctuation">;</span>
+  <span class="token keyword">let</span> body <span class="token operator">=</span> ctx<span class="token punctuation">.</span>body<span class="token punctuation">;</span>
+  <span class="token keyword">const</span> code <span class="token operator">=</span> ctx<span class="token punctuation">.</span>status<span class="token punctuation">;</span>
+  <span class="token comment">//...</span>
+
+  <span class="token comment">// status body</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">null</span> <span class="token operator">==</span> body<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ctx<span class="token punctuation">.</span>req<span class="token punctuation">.</span>httpVersionMajor <span class="token operator">&gt;=</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      body <span class="token operator">=</span> <span class="token function">String</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      body <span class="token operator">=</span> ctx<span class="token punctuation">.</span>message <span class="token operator">||</span> <span class="token function">String</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>res<span class="token punctuation">.</span>headersSent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      ctx<span class="token punctuation">.</span>type <span class="token operator">=</span> <span class="token string">'text'</span><span class="token punctuation">;</span>
+      ctx<span class="token punctuation">.</span>length <span class="token operator">=</span> Buffer<span class="token punctuation">.</span><span class="token function">byteLength</span><span class="token punctuation">(</span>body<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> res<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span>body<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// responses</span>
+  <span class="token comment">// 在 ctx.body 的 setter 中已经设置过例如 context-type 和 context-length 头了</span>
+  <span class="token comment">// 所以这里只是返回响应</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>Buffer<span class="token punctuation">.</span><span class="token function">isBuffer</span><span class="token punctuation">(</span>body<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> res<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span>body<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">'string'</span> <span class="token operator">==</span> <span class="token keyword">typeof</span> body<span class="token punctuation">)</span> <span class="token keyword">return</span> res<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span>body<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>body <span class="token keyword">instanceof</span> <span class="token class-name">Stream</span><span class="token punctuation">)</span> <span class="token keyword">return</span> body<span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// body: json</span>
+  body <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>body<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>res<span class="token punctuation">.</span>headersSent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ctx<span class="token punctuation">.</span>length <span class="token operator">=</span> Buffer<span class="token punctuation">.</span><span class="token function">byteLength</span><span class="token punctuation">(</span>body<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  res<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span>body<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//...</span>
+</code></pre></div><p>在入口代码中我们可以看到 koa 应用的两个主要函数<code>app.use</code>和<code>app.listen</code>，其中<code>app.use</code>函数向<code>this.middleware</code>数组中注册中间件，<code>app.listen</code>函数是创建服务器并开始监听的语法糖，它最终会在<code>http.createServer</code>中调用<code>app.callback</code>函数创建服务器。</p> <p>那么<code>app.callback</code>就是整个构造函数的核心内容了，它会返回适用于<code>http.createServer</code>方法的回调函数来处理请求，下面来一起分析它的内容。</p> <h2 id="app-callback"><a href="#app-callback" class="header-anchor">#</a> app.callback()</h2> <h2 id="koa-compose"><a href="#koa-compose" class="header-anchor">#</a> koa-compose</h2> <h2 id="handlerequest"><a href="#handlerequest" class="header-anchor">#</a> handleRequest()</h2> <div id="source_link"><a href="https://github.com/Styx11/styx-blog-source/blob/master/docs/blog/Koa/koa_second_part.md" target="_blank"><span class="source_link_bar">在 Github 上编辑此页</span> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/blog/Koa/" class="prev router-link-active">
+        Koa 源码解析（一）
+      </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.911218fd.js" defer></script><script src="/assets/js/2.5af35e1d.js" defer></script><script src="/assets/js/29.765aa3fb.js" defer></script><script src="/assets/js/5.4194a820.js" defer></script><script src="/assets/js/4.fa04dc2a.js" defer></script>
+  </body>
+</html>
